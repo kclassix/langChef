@@ -8,8 +8,11 @@ const app = express();
 app.use(cors("*"));
 
 app.use(bodyParser.json());
+app.post("/.netlify/functions/api", async (req, res) => {
+let request = JSON.parse(req.body);
+  console.log(request)
 
-async function translate(text, targetLanguage) {
+  async function translate(text, targetLanguage) {
   console.log(text, targetLanguage);
   let enText = text;
   let toLang = targetLanguage;
@@ -49,13 +52,8 @@ async function translate(text, targetLanguage) {
     return "Translation failed.";
   }
 };
-
-
-app.post("/.netlify/functions/api", async (req, res) => {
-let request = JSON.parse(req.body);
-  console.log(request)
   
-translate(request.question, request.targetLanguage);
+console.log(translate(request.question, request.targetLanguage));
 
   res.send("This IP address is not using a VPN. ");
 });
