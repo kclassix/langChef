@@ -8,11 +8,9 @@ const app = express();
 app.use(cors("*"));
 
 app.use(bodyParser.json());
-app.post("/.netlify/functions/api", async (req, res) => {
-let request = JSON.parse(req.body);
-  console.log(request)
 
-  async function translate(text, targetLanguage) {
+
+async function translate(text, targetLanguage) {
   console.log(text, targetLanguage);
   let enText = text;
   let toLang = targetLanguage;
@@ -39,20 +37,23 @@ let request = JSON.parse(req.body);
     let result = await response.text();
     let resultPro = result.replace(/\\/g, "");
     let transTag = resultPro.slice(resultPro.indexOf(`"[[["`) + 5);
-    // console.log(transTag.slice(0, transTag.indexOf(`","`)));
-    // console.log(
-    //   transTag.slice(transTag.indexOf(`","`) + 3, transTag.indexOf(`"],["`))
-    // );
-    return {transTag.slice(0, transTag.indexOf(`","`)), transTag.slice(
+    console.log(transTag.slice(0, transTag.indexOf(`","`)));
+    console.log(
+      transTag.slice(transTag.indexOf(`","`) + 3, transTag.indexOf(`"],["`))
+    );
+    return transTag.slice(
       transTag.indexOf(`","`) + 3,
       transTag.indexOf(`"],["`)
-    )};
+    );
   } catch (error) {
     console.error("Translation error:", error);
     return "Translation failed.";
   }
 };
-  
+
+app.post("/.netlify/functions/api", async (req, res) => {
+let request = JSON.parse(req.body);
+  console.log(request)
 console.log(await translate(request.question, request.targetLanguage));
 
   res.send("This IP address is not using a VPN. ");
