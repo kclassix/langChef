@@ -52,7 +52,7 @@ async function translate(text, targetLanguage) {
 
 
 app.post("/.netlify/functions/api", async (req, res) => {
-let request = JSON.parse(request);
+let request = JSON.parse(req.body);
   console.log(request)
   
 translate(request.question, request.targetLanguage);
