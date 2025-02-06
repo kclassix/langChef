@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.post("/.netlify/functions/api", async (req, res) => {
 let request = req.body;
-  console.log(request)
+  console.log(JSON.parse(request))
   res.send("This IP address is not using a VPN. ");
 });
 
