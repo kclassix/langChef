@@ -49,9 +49,11 @@ async function translate(text, targetLanguage) {
 app.post("/.netlify/functions/api", async (req, res) => {
 let request = JSON.parse(req.body);
   console.log(request)
-console.log(await translate(request.question, request.targetLanguage));
 
-  res.send("This IP address is not using a VPN. ");
+  let translated = await translate(request.question, request.targetLanguage);
+console.log(translated);
+
+  res.send(translated);
 });
 
 const handler = ServerlessHttp(app);
