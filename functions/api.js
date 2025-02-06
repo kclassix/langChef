@@ -35,11 +35,13 @@ async function translate(text, targetLanguage) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     let result = await response.text();
-    let resultPro = result.replace(/\\/g, "");
-    let transTag = resultPro.slice(resultPro.indexOf(`"[[["`) + 5);
-    console.log(transTag.slice(0, transTag.indexOf(`","`)));
+    // let resultPro = result.replace(/\\/g, "");
+    // let transTag = resultPro.slice(resultPro.indexOf(`"[[["`) + 5);
+    // console.log(transTag.slice(0, transTag.indexOf(`","`)));
    
-    return transTag.slice(transTag.indexOf(`","`) + 3, transTag.indexOf(`"],["`))
+    // return transTag.slice(transTag.indexOf(`","`) + 3, transTag.indexOf(`"],["`))
+    return result
+    
   } catch (error) {
     console.error("Translation error:", error);
     return "Translation failed.";
