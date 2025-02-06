@@ -34,7 +34,7 @@ async function translate(text, targetLanguage) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        let result = await request.text();
+        let result = await response.text();
         let resultPro = result.replace(/\\/g, '');
         let transTag = resultPro.slice(resultPro.indexOf(`[[[null,null,null,null,null,[["`) + 31, resultPro.indexOf(`",null,null,null,null,null,"`));
 
