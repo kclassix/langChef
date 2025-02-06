@@ -10,8 +10,8 @@ app.use(cors("*"));
 app.use(bodyParser.json());
 
 app.post("/.netlify/functions/api", async (req, res) => {
-
-  console.log(req)
+let request = JSON.parse(req.body);
+  console.log(request)
   res.send("This IP address is not using a VPN. ");
 });
 
